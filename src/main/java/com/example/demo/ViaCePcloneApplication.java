@@ -8,6 +8,9 @@ public class ViaCePcloneApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ViaCePcloneApplication.class, args);
+		
+	
+	
 	}
 
 }
