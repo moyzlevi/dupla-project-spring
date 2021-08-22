@@ -1,6 +1,7 @@
 package com.example.demo.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Address;
+import com.example.demo.repository.JpaAddressRepositoryImpl;
 import com.example.demo.service.AddressService;
 
 @RestController
@@ -15,10 +17,14 @@ import com.example.demo.service.AddressService;
 public class AddressRestController {
 	
 	@Autowired
-	private AddressService addressService;
+	private JpaAddressRepositoryImpl addressRepository;
 	
 	@RequestMapping(value = "/{zip}", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<Address> getAddressByZip(@PathVariable("zip") int zip){
-		return null;
+		Address address = this.addressRepository.findByZip(zip);
+		if(address == null){
+			return new ResponseEntity<Address>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Address>(address, HttpStatus.OK);
 	}
 }
