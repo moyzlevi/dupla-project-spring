@@ -19,9 +19,9 @@ public class Address {
     @NotEmpty
     private int zip;
     
-    @Column(name = "publicPlace")
+    @Column(name = "publicplace")
     @NotEmpty
-    private String publicPlace;
+    private String publicplace;
 	
     @Column(name = "district")
     @NotEmpty
@@ -31,10 +31,13 @@ public class Address {
     @NotEmpty
     private String state;
 	
-	public Address(int zip, String publicPlace, String district, String state) {
+    //Default Constructor
+    public Address() {}
+    
+	public Address(int zip, String publicplace, String district, String state) {
 		super();
 		this.zip = zip;
-		this.publicPlace = publicPlace;
+		this.publicplace = publicplace;
 		this.district = district;
 		this.state = state;
 	}
@@ -47,12 +50,12 @@ public class Address {
 		this.zip = zip;
 	}
 
-	public String getPublicPlace() {
-		return publicPlace;
+	public String getPublicplace() {
+		return publicplace;
 	}
 
-	public void setPublicPlace(String publicPlace) {
-		this.publicPlace = publicPlace;
+	public void getPublicplace(String publicplace) {
+		this.publicplace = publicplace;
 	}
 
 	public String getDistrict() {
