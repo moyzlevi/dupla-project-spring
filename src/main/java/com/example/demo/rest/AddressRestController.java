@@ -1,5 +1,7 @@
 package com.example.demo.rest;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,4 +29,15 @@ public class AddressRestController {
 		}
 		return new ResponseEntity<Address>(address, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Collection<Address>> getAddressesList(){
+		Collection<Address> addresses = this.addressRepository.findAll();
+		if (addresses.isEmpty()) {
+			return new ResponseEntity<Collection<Address>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Collection<Address>>(addresses, HttpStatus.OK);
+	}
+	
+	
 }

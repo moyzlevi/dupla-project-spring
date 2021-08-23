@@ -1,10 +1,14 @@
 package com.example.demo.repository;
 
 import javax.persistence.Query;
+
+import java.util.Collection;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.context.annotation.Profile;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.Address;
@@ -24,4 +28,9 @@ public class JpaAddressRepositoryImpl {
         query.setParameter("zip", zip);
         return (Address) query.getSingleResult();
     }
+    
+	@SuppressWarnings("unchecked")
+	public Collection<Address> findAll() throws DataAccessException {
+		return this.em.createQuery("SELECT address FROM Address address").getResultList();
+	}
 }
